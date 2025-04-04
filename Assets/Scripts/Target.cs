@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    private int scoreValue = 10;
+    private Rigidbody rb;
+
+    [SerializeField]
+    private ScoreManager scoreManager;
+
+    [SerializeField]
+    private int scoreValue = 1;
     public int ScoreValue{
         get{
             return scoreValue;
@@ -14,13 +20,23 @@ public class Target : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private ScoreManager scoreManager;
+    private bool isFallen = false;
 
-    void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.CompareTag("Bullet")){
+    void Start(){
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update(){
+        if(!isFallen && transform.position.y <= 0.5f){
+            isFallen = true;
             scoreManager.Addscore(scoreValue);
-            Destroy(gameObject);
+            Destroy(gameObject, 2f);
         }
+    }
+
+    public void TakeDamage(Vector3 impactForce){
+        rb.AddForce(impactForce, ForceMode.Impulse);
+        Vector3 torque = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * impactForce.magnitude;
+        rb.AddTorque(torque, ForceMode.Impulse);
     }
 }
