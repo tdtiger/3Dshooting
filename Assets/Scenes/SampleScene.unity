@@ -950,7 +950,7 @@ MonoBehaviour:
   barFill: {fileID: 176257376}
   sweetSpot: {fileID: 2094341932}
   speed: 300
-  sweetRange: 50
+  sweetRange: 30
 --- !u!1 &425945604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,6 +2437,7 @@ MonoBehaviour:
   targetPrefabs:
   - {fileID: 7904839464256788492, guid: 244d4ec8c7a282848b52c5d7ca529e43, type: 3}
   - {fileID: 2198376237770522095, guid: d1f79514a82db6843841b538df05abc3, type: 3}
+  - {fileID: 4895310787838772520, guid: 44bfba60f4d4bba449a20015dd1dc887, type: 3}
   spawnPoints:
   - {fileID: 292216168}
   - {fileID: 978872240}
@@ -2819,7 +2820,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 20}
+  m_SizeDelta: {x: 30, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2094341933
 MonoBehaviour:

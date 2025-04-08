@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7151352765949118087}
   m_Layer: 0
   m_Name: MetalTarget
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
   targetManager: {fileID: 0}
-  scoreValue: 5
+  scoreValue: 3
   type: 1
 --- !u!65 &7151352765949118087
 BoxCollider:

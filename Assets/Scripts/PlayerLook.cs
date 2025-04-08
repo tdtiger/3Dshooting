@@ -19,15 +19,12 @@ public class PlayerLook : MonoBehaviour
 
     float xRotation = 0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update(){
+        // マウスの動きに合わせて視点を移動
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 

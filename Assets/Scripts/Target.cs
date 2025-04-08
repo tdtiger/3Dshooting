@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ターゲットのタイプ
 public enum TargetType{
     Normal,
-    Metal
+    Gold,
+    Iron
 }
 
 public class Target : MonoBehaviour
@@ -17,8 +19,7 @@ public class Target : MonoBehaviour
     [SerializeField]
     private TargetManager targetManager;
 
-    [SerializeField]
-    private int scoreValue = 1;
+    private int scoreValue;
     public int ScoreValue{
         get{
             return scoreValue;
@@ -41,19 +42,25 @@ public class Target : MonoBehaviour
         // if(targetManager != null)みたいな記述を省略できる．
         targetManager?.SetTargets(gameObject);
 
+        // ターゲットのタイプに応じた得点を設定
         switch(type){
             case TargetType.Normal:
                 scoreValue = 1;
                 break;
-            case TargetType.Metal:
+            case TargetType.Gold:
+                scoreValue = 3;
+                break;
+            case TargetType.Iron:
                 scoreValue = 5;
                 break;
             default:
+                scoreValue = 1;
                 break;
         }
     }
 
     void Update(){
+        // y座標が1以下になったら，落下したとみなす
         if(!isFallen && transform.position.y <= 1f){
             isFallen = true;
             scoreManager?.Addscore(scoreValue);
@@ -64,8 +71,10 @@ public class Target : MonoBehaviour
     }
 
     public void TakeDamage(Vector3 impactForce){
+        // ターゲットに衝撃を与える
         rb.AddForce(impactForce, ForceMode.Impulse);
-        Vector3 torque = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * impactForce.magnitude;
+        // ターゲットにランダムに回転させる
+        Vector3 torque = new Vector3(Random.Range(-0.7f, -0.7f), Random.Range(-0.7f, 0.7f), Random.Range(-0.7f, 0.7f)) * impactForce.magnitude;
         rb.AddTorque(torque, ForceMode.Impulse);
     }
 }

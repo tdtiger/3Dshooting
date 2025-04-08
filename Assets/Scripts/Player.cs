@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // 移動速度
     [SerializeField]
     private float speed;
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update(){
+        // 左右キーで移動
         if(Input.GetKey(KeyCode.LeftArrow)){
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
