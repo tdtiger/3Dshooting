@@ -10,7 +10,6 @@ public class Gun : MonoBehaviour
     [SerializeField]
     Transform firePoint;
 
-    private float bulletSpeed = 20f;
 
     [SerializeField]
     private AudioSource gunSound;
@@ -19,20 +18,28 @@ public class Gun : MonoBehaviour
     private AudioClip gunSoundClip;
 
     [SerializeField]
-    private GameObject impactEffect;
-
-    [SerializeField]
     private Crosshair crosshair;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetButtonDown("Fire1")){
-            Shoot();
+    [SerializeField]
+    private GameObject miniGameUI;
+
+    private GaugeController gauge;
+
+    void Start(){
+        gauge = miniGameUI.GetComponent<GaugeController>();
+        miniGameUI.SetActive(false);
+    }
+
+    void Update(){
+        if(Input.GetMouseButtonDown(0) && !miniGameUI.activeSelf){
+            miniGameUI.SetActive(true);
+            gauge.StartGauge(FireBullet);
         }
     }
 
-    void Shoot(){
+    void Shoot(GameObject bullet, float speed){
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+
         if(crosshair != null){
             crosshair.ExpandCrosshair();
         }
@@ -41,11 +48,20 @@ public class Gun : MonoBehaviour
             gunSound.PlayOneShot(gunSoundClip);
         }
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.velocity = firePoint.forward * bulletSpeed;
+        rb.velocity = firePoint.forward * speed;
 
         Destroy(bullet, 3f);
+    }
+
+    private void FireBullet(bool isSuccess){
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+        float baseSpeed = 15f;
+        if(isSuccess)
+            baseSpeed *= 1.8f;
+
+        Shoot(bullet, baseSpeed);
+
+        miniGameUI.SetActive(false);
     }
 }
