@@ -29,14 +29,14 @@ public class Bullet : MonoBehaviour
                 target.TakeDamage(impactForce);
             }
         }
+            // 着弾時のエフェクトを生成
+            if (impactEffectPrefab != null){
+                GameObject eff = Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
+                Destroy(eff, 2f);
+            }
 
-        // 着弾時のエフェクトを生成
-        if (impactEffectPrefab != null){
-            GameObject eff = Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
-            Destroy(eff, 2f);
-        }
+            // 自身を削除
+            Destroy(gameObject);
 
-        // 自身を削除
-        Destroy(gameObject);
     }
 }
