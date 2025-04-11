@@ -7,4 +7,4 @@ Unityで3Dプロジェクトを開発した経験がなかったため，その�
 現時点では，ゲームシーンの左上に配置されている白い立方体に弾を当てることでタイトルシーンに戻ることができるようになっています．<br>
 <br>
 <h2>デモ</h2>
-https://tdtiger.github.io/3Dshooting/Build/index.html
+https://tdtiger.github.io/3Dshooting/index.html
