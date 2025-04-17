@@ -8,3 +8,7 @@ Unityで3Dプロジェクトを開発した経験がなかったため，その�
 <br>
 <h2>デモ</h2>
 https://tdtiger.github.io/3Dshooting/index.html
+<br>
+<h2>使用させていただいた素材</h2>
+On-Jin ~音人~ 
+https://on-jin.com/
