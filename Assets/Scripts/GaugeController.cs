@@ -12,6 +12,10 @@ public class GaugeController : MonoBehaviour
     [SerializeField]
     private RectTransform sweetSpot;
 
+    // ミニゲームの大成功部分
+    [SerializeField]
+    private RectTransform perfectSpot;
+
     // ゲージの移動速度
     [SerializeField]
     private float speed = 300f;
@@ -20,11 +24,21 @@ public class GaugeController : MonoBehaviour
     [SerializeField]
     private float sweetRange;
 
+    // ミニゲームの大成功範囲
+    [SerializeField]
+    private float perfectRange;
+
     private bool movingRight = true;
 
     private bool isActive = false;
 
-    private System.Action<bool> onFinish;
+    public enum ResultType{
+        Fail,
+        Success,
+        Perfect
+    }
+
+    private System.Action<ResultType> onFinish;
 
     void Update()
     {
@@ -33,11 +47,7 @@ public class GaugeController : MonoBehaviour
             return;
 
         // ゲージの端に到達したら移動方向を反転
-        float move;
-        if(movingRight)
-            move = speed * Time.deltaTime;
-        else
-            move = speed * Time.deltaTime * (-1);
+        float move = (movingRight ? 1 : -1) * speed * Time.deltaTime;
 
         barFill.anchoredPosition += new Vector2(move, 0);
         if(barFill.anchoredPosition.x >= 100)
@@ -49,15 +59,28 @@ public class GaugeController : MonoBehaviour
             isActive = false;
 
             float dist = Mathf.Abs(barFill.anchoredPosition.x - sweetSpot.anchoredPosition.x);
-            bool isSuccess = dist < sweetRange;
+            ResultType result;
 
-            onFinish?.Invoke(isSuccess);
+            if(dist <= perfectRange){
+                result = ResultType.Perfect;
+                Debug.Log("Perfect!");
+            }
+            else if(dist <= sweetRange){
+                result = ResultType.Success;
+                Debug.Log("Success!");
+            }
+            else{
+                result = ResultType.Fail;
+                Debug.Log("Fail...");
+            }
+
+            onFinish?.Invoke(result);
             // 発射できたらゲージを非表示にする
             gameObject.SetActive(false);
         }
     }
 
-    public void StartGauge(System.Action<bool> callback){
+    public void StartGauge(System.Action<ResultType> callback){
         onFinish = callback;
         isActive = true;
         barFill.anchoredPosition = new Vector2(-100, 0);
