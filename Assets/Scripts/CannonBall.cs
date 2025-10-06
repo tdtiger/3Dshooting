@@ -23,12 +23,16 @@ public class Cannonball : MonoBehaviour
             GameObject effect = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(effect.gameObject, 3f);
         }
+    
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, explosionRadius);
         foreach(Collider nearby in colliders){
             Rigidbody rb = nearby.attachedRigidbody;
             if(rb != null)
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
         }
+
+        if(CameraShake.Instance != null)
+            CameraShake.Instance.Shake(0.2f, 0.3f);
 
         Destroy(gameObject);
     }

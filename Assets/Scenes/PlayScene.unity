@@ -1721,7 +1721,7 @@ MonoBehaviour:
   fireRate: 0
   firePoint: {fileID: 595418151}
   muzzleFlashPrefab: {fileID: 8483939101177427486, guid: e53420de565d842489b60231c4d74444, type: 3}
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: b1f62cb39e69544efa565ffc280de805, type: 3}
   cannonBallPrefab: {fileID: 7398668116408808285, guid: 26fdaa05d3cee4aad8fb6a3d8c02b352, type: 3}
   launchForce: 30
   explosionPrefab: {fileID: 4089384289092668211, guid: 6f9469bd7abc5464ea4dd44a75e1899e, type: 3}
