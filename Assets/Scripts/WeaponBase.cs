@@ -16,6 +16,8 @@ public abstract class WeaponBase : MonoBehaviour{
     protected GameObject muzzleFlashPrefab;
     [SerializeField]
     protected AudioClip fireSound;
+    [SerializeField]
+    protected Crosshair crosshair;
 
     protected float nextFireTime = 0f;
     protected AudioSource audioSource;
@@ -30,6 +32,7 @@ public abstract class WeaponBase : MonoBehaviour{
         if(Time.time >= nextFireTime){
             Fire(powerMultiplier);
             nextFireTime = Time.time + fireRate;
+            crosshair.ExpandCrosshair();
         }
     }
 

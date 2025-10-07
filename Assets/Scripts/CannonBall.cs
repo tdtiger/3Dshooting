@@ -12,8 +12,12 @@ public class Cannonball : MonoBehaviour
     private float explosionForce = 7000f;
     [SerializeField]
     private GameObject explosionPrefab;
+    [SerializeField]
+    private AudioClip explosionSound;
+    private AudioSource audioSource;
 
     void Start(){
+        audioSource = GetComponent<AudioSource>();
         Destroy(gameObject, lifeTime);
     }
 
@@ -31,8 +35,13 @@ public class Cannonball : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
         }
 
+        if(explosionSound && audioSource){
+            Debug.Log("Play Explosion Sound");
+            AudioSource.PlayClipAtPoint(explosionSound, this.transform.position);
+        }
+
         if(CameraShake.Instance != null)
-            CameraShake.Instance.Shake(0.2f, 0.3f);
+            CameraShake.Instance.Shake(0.7f, 1f);
 
         Destroy(gameObject);
     }

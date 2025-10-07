@@ -13,7 +13,7 @@ public class ShockWaveWeapon : WeaponBase
     private float force = 700f;
 
     protected override void Fire(float powerMultiplier){
-        Vector3 origin = firePoint.position + GetFireDirection() * 10f;
+        Vector3 origin = firePoint.position + GetFireDirection() * 15f;
 
         if(shockwaveEffectPrefab){
             GameObject effect = Instantiate(shockwaveEffectPrefab, origin, Quaternion.identity);
